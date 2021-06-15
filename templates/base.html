@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    {% block extrastatic %}
+    {% endblock %}
+    <title>{% block title %} Agromarket {% endblock %}</title>
+    <script src="https://kit.fontawesome.com/9c094d55de.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href= " {% static 'css/estilo.css' %}">
+</head>
+<body>
+    <!-- header-->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <h1>Agro<b>Market</b> </h1>
+            </div>
+            <div class="menu">
+                <nav>
+                    <ul>
+                        {% block Select-Pagina %}
+                        <li class="menu-selected"><a href="#"  class="text-menu-selected">Inicio</a></li>
+                        <li><a href="#">Registrarse</a></li>
+                        <li><a href="#">Ayuda</a></li>
+                        <li><a href="#">Lista de deseos</a></li>
+                        {% endblock Select-Pagina %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- Portada-->       
+        {% block Contenido %}
+        
+        {% endblock Contenido %}
+
+    <!-- footer -->
+    <div class="container-footer">
+        <footer>
+            <div class="logo-footer">
+                <img src="" alt="">
+            </div>
+            <div class="redes-footer">
+                <a href="#"><i
+                    class="fab fa-facebook icon-redes-footer"></i></a>
+            <a href="#"><i class="fab fa-instagram icon-redes-footer"></i></a>
+            <a href="#"><i class="fab fa-twitter icon-redes-footer"></i></a>
+            </div>
+            <div class="certificacion">
+                <p>
+                    <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                        <img style="border:0;width:88px;height:31px"
+                            src="http://jigsaw.w3.org/css-validator/images/vcss" alt="¡CSS Válido!" />
+                    </a>
+                </p>
+                <p>
+                    <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                        <img style="border:0;width:88px;height:31px"
+                            src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="¡CSS Válido!" />
+                    </a>
+                </p>
+            </div>
+            <hr>
+            <h4>@ 2021 Agromarket - Todos Los Derechos Reservados </h4>
+        </footer>
+    </div>
+    <script  src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
