@@ -32,7 +32,7 @@
 
                         {% endif %}
                         
-                        <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perfil-->
+                        <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
                         {% if user.is_authenticated %}
 
                         <li><a href="{% url 'verPerfil' %}">{{user.username}}</a></li>
