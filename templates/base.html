@@ -22,9 +22,23 @@
                     <ul>
                         {% block Select-Pagina %}
                         <li class="menu-selected"><a href="#"  class="text-menu-selected">Inicio</a></li>
+                        
+                        <!--En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion-->
+                        {% if not user.is_authenticated %}
+
                         <li><a href="#">Registrarse</a></li>
-                        <li><a href="#">Ayuda</a></li>
-                        <li><a href="#">Lista de deseos</a></li>
+                        
+                        <li><a href="{% url 'login' %}">Iniciar Sesion</a></li>
+
+                        {% endif %}
+                        
+                        <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perfil-->
+                        {% if user.is_authenticated %}
+
+                        <li><a href="{% url 'verPerfil' %}">{{user.username}}</a></li>
+
+                        {% endif %} 
+                        
                         {% endblock Select-Pagina %}
                     </ul>
                 </nav>
@@ -34,9 +48,9 @@
 
 
     <!-- Portada-->       
-    {% block Contenido %}
+    {% block content %}
         
-    {% endblock Contenido %}
+    {% endblock content %}
     
     
     

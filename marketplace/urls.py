@@ -14,27 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.conf.urls import url
+from django.urls import path, include, re_path
 from django.contrib.auth.views import LoginView, LogoutView, TemplateView
-from . import views
 from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
+
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.inicio, name="inicio"),
-    #path('', views.inicio, name="login2"),
     path('usuario/', include('Usuario.urls')),
-#    path('login/', auth_views.LoginView.as_view(template_name='login2.html'), name='login'),
+    path('accounts/login/', LoginView.as_view(redirect_authenticated_user=True, template_name='Usuario/login.html'), name='login'),
+    path('logout/', LogoutView.as_view(template_name='Usuario/logout.html'), name='logout'),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
 
-    #path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-
-
-    #path('login/', LoginView.as_view(redirect_authenticated_user=True, template_name='login2.html'), name='login'),
-
-    #path('logout/', LogoutView.as_view(template_name='Usuario/logout.html'), name='logout'),
-
-    #path('', TemplateView.as_view(template_name='home.html'),  name='home'),
-  
 ]
