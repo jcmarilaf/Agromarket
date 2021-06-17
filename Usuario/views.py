@@ -43,12 +43,6 @@ def Registro(request):
 
 
 
-
-#class RegistroUsuario(CreateView):
-#    model = User
-#    template_name = "Usuario/registrar.html"
-#    form_class = RegistroForm
-#    success_url = reverse_lazy('perfil')
  
  
 class UserList(ListView):
