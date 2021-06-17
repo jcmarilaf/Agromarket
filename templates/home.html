@@ -1,18 +1,23 @@
 {% extends 'base.html' %} 
-{% block Contenido %}
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+
+
+{% block content %}
 <div class="container-content">
     <H1>HOLA</H1>
     <H1>HOLA</H1>
 
-    <H1>HOLA</H1>
-    <H1>HOLA</H1>
-    <H1>HOLA</H1>
-    <H1>HOLA</H1>
-    <H1>HOLA</H1>
-    <H1>HOLA</H1>
-    <H1>HOLA</H1>
-    <H1>HOLA</H1>
-    <H1>HOLA</H1>
+    <h2>Home</h2>
+    <h1>GGGGGG</h1>
+    {% if user.is_authenticated %}
+    <p>You are welcome on Home Page</p>
+    <p>Your name is - {{user.first_name}} {{user.last_name}}</p>
+    <p>Your email is - {{user.email}}</p>
+    <br><br>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
 
 </div>
-{% endblock Contenido %}
+{% endblock content %}

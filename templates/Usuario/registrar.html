@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    <h1>Agregar USUARIO</h1>
+    
+    <div class="content container">
+        <form method="POST" class="letra_negra">
+          <h1 class="letra_negra">Formulario de Registro de Usuario</h1>
+          <hr><br>
+          {% csrf_token %}
+          {{ form_registro.as_p }}
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          
+          <hr>
+        </form>
+
+        <h1>asaaa</h1>
+        <h1>asaaa</h1>
+        <h1>asaaa</h1>
+        <h1>asaaa</h1>
+        <h1>asaaa</h1>
+        <h1>asaaa</h1>
+    </div>     
+
+
+{% endblock %}

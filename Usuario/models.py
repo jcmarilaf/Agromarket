@@ -25,7 +25,7 @@ class Usuario(models.Model):
         ('Vendedor', 'Vendedor'),
         ('Cliente y vendedor', 'Cliente y vendedor'),
     )
-    tipo_Usuario = models.CharField(max_length=30, choices=tipo_usuario_opciones)
+    tipo_Usuario = models.CharField(max_length=30, choices=tipo_usuario_opciones, null= True)
 
     def __str__(self):
         return str(self.fono)

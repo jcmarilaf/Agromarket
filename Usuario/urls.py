@@ -1,9 +1,17 @@
 from django.urls import path, include
-from . import views
-from .views import RegistroUsuario, UserList
+from django.conf.urls import url
+from .views import RegistroUsuario, UserList, SuccessLogin
+from django.contrib.auth.views import login_required
+from django.contrib.auth import views as auth_views
+from .views import Registro, UserList
+
 
 urlpatterns = [
-    path('registrar', RegistroUsuario.as_view(), name="registroUsuario"),
-    path('listar', UserList.as_view(), name="list_user"), 
+
+    path('verPerfil', UserList.as_view(), name="verPerfil"),
+    path('registro', Registro, name="registro"),
+
+
+
 ]
 
