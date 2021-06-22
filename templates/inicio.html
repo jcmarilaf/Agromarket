@@ -1,6 +1,99 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% load static %}
 {% block Contenido %}
+<div class="inicio">
+    <h1>Te damos la bienvenida a nuestro sitio web</h1>
+    <div class="ctn-bars-search">
+        <input type="text" id="inputsearch" placeholder="¿Qué deseas buscar?">
+    </div>
+</div>
+
 <div class="container-content">
-    
+    <input type="radio" id="TODOS" name="categorias" value="TODOS" checked>
+    <input type="radio" id="VERDURA" name="categorias" value="VERDURA">
+    <input type="radio" id="FRUTA" name="categorias" value="FRUTA">
+    <input type="radio" id="CARNE" name="categorias" value="CARNE">
+    <input type="radio" id="CEREALES" name="categorias" value="CEREALES">
+    <input type="radio" id="LIQUIDOS" name="categorias" value="LIQUIDOS">
+    <div class="container-categorias">
+        <h2>Categorias:</h2>
+        <label for="TODOS">TODOS</label>
+        <label for="VERDURA">VERDURA</label>
+        <label for="FRUTA">FRUTA</label>
+        <label for="CARNE">CARNE</label>
+        <label for="CEREALES">CEREALES</label>
+        <label for="LIQUIDOS">LIQUIDOS</label>
+    </div>
+    <div class="container-productos">
+        <div class="productos" >
+            <div class="producto" data-category="FRUTA">
+                <div class="ctn-img">
+                    <img src="{% static 'img/foto_prueba1.jpg' %}" alt="Imagen no encontrada">
+                </div>
+                <h2>$5.000</h2>
+                <h3>Hamburguesa</h3>
+                <span>15 de junio 2021</span>
+                <ul class="ctn-tag">
+                    <li>Comida</li>
+                    <li>Carne</li>
+                </ul>
+                <a href="#"><button>Ver producto</button></a>
+            </div>
+            <div class="producto" data-category="VERDURA">
+                <div class="ctn-img">
+                    <img src="{% static 'img/foto_prueba2.jpg' %}" alt="Imagen no encontrada">
+                </div>
+                <h2>$5.000</h2>
+                <h3>Hamburguesa</h3>
+                <span>15 de junio 2021</span>
+                <ul class="ctn-tag">
+                    <li>Comida</li>
+                    <li>Carne</li>
+                </ul>
+                <a href="#"><button>Ver producto</button></a>
+            </div>
+            <div class="producto" data-category="CARNE">
+                <div class="ctn-img">
+                    <img src="{% static 'img/foto_prueba3.jpg' %}" alt="Imagen no encontrada">
+                </div>
+                <h2>$5.000</h2>
+                <h3>Hamburguesa</h3>
+                <span>15 de junio 2021</span>
+                <ul class="ctn-tag">
+                    <li>Comida</li>
+                    <li>Carne</li>
+                </ul>
+                <a href="#"><button>Ver producto</button></a>
+            </div>
+            <div class="producto" data-category="CARNE">
+                <div class="ctn-img">
+                    <img src="{% static 'img/foto_prueba1.jpg' %}" alt="Imagen no encontrada">
+                </div>
+                <h2>$5.000</h2>
+                <h3>Hamburguesa</h3>
+                <span>15 de junio 2021</span>
+                <ul class="ctn-tag">
+                    <li>Comida</li>
+                    <li>Carne</li>
+                </ul>
+                <a href="#"><button>Ver producto</button></a>
+            </div>
+            <div class="producto" data-category="LIQUIDOS">
+                <div class="ctn-img">
+                    <img src="{% static 'img/foto_prueba2.jpg' %}" alt="Imagen no encontrada">
+                </div>
+                <h2>$5.000</h2>
+                <h3>Hamburguesa</h3>
+                <span>15 de junio 2021</span>
+                <ul class="ctn-tag">
+                    <li>Comida</li>
+                    <li>Carne</li>
+                </ul>
+                <a href="#"><button>Ver producto</button></a>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 {% endblock Contenido %}

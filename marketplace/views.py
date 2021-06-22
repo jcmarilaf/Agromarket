@@ -1,4 +1,4 @@
 from django.shortcuts import render, redirect
 
 def inicio(request):
-    return render(request, "login.html")
+    return render(request, "inicio.html")
