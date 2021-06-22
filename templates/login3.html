@@ -1,0 +1,82 @@
+{% extends 'base.html' %} 
+{% block title %} Login y Registro {% endblock %}
+
+
+
+{% block Contenido %} 
+
+
+<div>
+    <h1>.</h1>
+    <h1>.</h1>
+
+    <div id="registro" class="container">
+        <h1 class="display">Login</h1><br>
+        <form method="POST" id="formulario">
+            {% csrf_token %}
+    
+            <div class="form-group">
+                <label for="username">Nombre de Usuario</label><br>
+                <input name="username" class="form-control" type="text"/>
+            </div>
+    
+            <div class="form-group">
+                <label for="password">Password</label><br>
+                <input name="password" class="form-control" type="password"/>
+            </div>
+    
+            {% if form.non_field_errors %}
+            <div class="form-group">
+                <div class="bg-danger mt-1 p-2">Login incorrecto!</div>
+            </div>  
+            {% endif %}
+            
+            {{form.non_field_errors}}
+    
+            <div class="form-group">
+                <input class="btn" type="submit" value="Enviar"/>
+            </div>
+        </form>
+    </div>
+    
+
+</div>
+
+
+<div class="contenedor_todo_login">
+    <div class="contenedor__todo">
+        <div class="caja__trasera">
+            <!--Caja trasera Formulario-->
+            <div class="caja__trasera-login">
+                <h3>¿Ya tienes una cuenta?</h3>
+                <p>Iniciar Sesion </p>
+                <button id="btn__Iniciar-sesion">Iniciar Sesión</button>
+            </div>
+            <div class="caja__trasera-register">
+                <h3>¿Aun no tienes una cuenta?</h3>
+                <p>Registarte! </p>
+                <button id="btn__registrate">Regístrarse</button>
+            </div>
+        </div>
+        <div class="contenedor__login-register">
+            <!--Formulario login-->
+            <form action="" class="formulario__login">
+                <h2>Iniciar Sesion</h2>
+                <input type="text" class="form-control" placeholder="Correo Electronico">
+                <input type="password" class="form-control" placeholder="Contraseña">
+                <input class="btn" type="submit" value="Enviar"/>
+            </form>
+            <!--Formulario Registro-->
+            <form action="" class="formulario__register">
+                <h2>Registrarse</h2>
+                <input type="text" placeholder="Nombre completo">
+                <input type="text"  placeholder="Correo Electronico">
+                <input type="text" placeholder="Usuario">
+                <input type="password" placeholder="Contraseña">
+                <button>Registrarse</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock Contenido %}
+

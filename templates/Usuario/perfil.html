@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+
+
+{% block content %}
+   {% if object_list %}
+
+
+   <div class="container">
+        <div> 
+            <hr>
+            <h1>Bienvenido {{ user.first_name }}, estás viendo tu perfil.</h1>
+            <hr><br>
+            <p>Nombre de usuario: {{ user.username }}</p>
+            <p>Nombre: {{ user.first_name }}</p>
+            <p>Apellidos: {{ user.last_name }}</p>
+            <p>Correo: {{ user.email }}</p>    
+            <!--<p>Rut: {{ user.registrado.rut }}</p>
+            <p>Edad: {{ user.registrado.edad }}</p>
+            <p>Número celular: {{ user.registrado.celular }}</p>  -->
+            <br>
+
+            <input type="button" value="Editar" class="btn btn-primary" onclick="alert('pendiente')">
+            <a href="{% url 'logout' %}" class="button btn btn-primary">Cerrar sesión</a>
+            <br><hr>
+        </div>
+    </div> 
+
+
+
+     <!--   {% for user in object_list %}
+            <p>Nombre: {{ user.username }}</p>
+            <p>email: {{ user.email }}</p>      
+
+            <br>
+        {% endfor %} -->
+        
+        {% else %}
+        <h1>No hay registros de user</h1>
+        {% endif %}
+
+{% endblock %}

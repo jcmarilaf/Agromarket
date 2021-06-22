@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import IntegerField
@@ -17,10 +18,17 @@ class Usuario(models.Model):
     descripcionPerfil = models.CharField(max_length=500, null= True,  verbose_name="Descripción perfil")
     fotoPerfil = models.ImageField(default="sinfoto.jpg", null=False, blank=False,  verbose_name="Foto de perfil")
     cantidadProductos = IntegerField(blank= True, null=True,  verbose_name="Cantidad de productos")
-    tipoUsuario = models.ForeignKey(TipoUsuario, on_delete=models.DO_NOTHING)
+    #tipoUsuario = models.ForeignKey(TipoUsuario, on_delete=models.DO_NOTHING)
+
+    tipo_usuario_opciones = (
+        ('Cliente', 'Cliente'),
+        ('Vendedor', 'Vendedor'),
+        ('Cliente y vendedor', 'Cliente y vendedor'),
+    )
+    tipo_Usuario = models.CharField(max_length=30, choices=tipo_usuario_opciones, null= True)
 
     def __str__(self):
-        return str(self.user.last_name)
+        return str(self.fono)
 
 
 
