@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\Juanka\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+=======
+    "python.pythonPath": "C:\\Users\\Matia\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
+>>>>>>> 065149b6dd4fccb37cafe8042079a96efc7ba173
     "git.ignoreLimitWarning": true
 }

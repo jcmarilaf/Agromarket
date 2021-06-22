@@ -12,6 +12,7 @@
 </head>
 <body>
     <!-- header-->
+    
     <header>
         <div class="header-content">
             <div class="logo">
@@ -22,21 +23,45 @@
                     <ul>
                         {% block Select-Pagina %}
                         <li class="menu-selected"><a href="#"  class="text-menu-selected">Inicio</a></li>
+<<<<<<< HEAD
                         <li><a href="#">Ingresar</a></li>
                         <li><a href="#">Ayuda</a></li>
                         <li><a href="#">Lista de deseos</a></li>
+=======
+                        
+                        <!--En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion-->
+                        {% if not user.is_authenticated %}
+
+                        <li><a href="#">Registrarse</a></li>
+                        
+                        <li><a href="{% url 'login' %}">Iniciar Sesion</a></li>
+
+                        {% endif %}
+                        
+                        <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
+                        {% if user.is_authenticated %}
+
+                        <li><a href="{% url 'verPerfil' %}">{{user.username}}</a></li>
+
+                        {% endif %} 
+                        
+>>>>>>> 065149b6dd4fccb37cafe8042079a96efc7ba173
                         {% endblock Select-Pagina %}
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
-    <!-- Portada-->       
-        {% block Contenido %}
-        
-        {% endblock Contenido %}
 
-    <!-- footer -->
+
+    <!-- Portada-->       
+    {% block content %}
+        
+    {% endblock content %}
+    
+    
+    
+        <!-- footer -->
     <div class="container-footer">
         <footer>
             <div class="logo-footer">
