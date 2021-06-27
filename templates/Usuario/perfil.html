@@ -21,7 +21,13 @@
 <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
 {% if user.is_authenticated %}
 
+<li><a href="{% url 'agregar_producto' %}">Agregar producto</a></li>
 <li class="menu-selected"><a href="{% url 'perfil' %}" class="text-menu-selected">{{user.username}}</a></li>
+{% if user.fotoPerfil %}
+<img src="{{ user.fotoPerfil.url }}" alt="imagen no encontrada" class="image-menu">
+{% else %}
+<img src="{% static 'image_default.png'%}" alt="imagen no encontrada" class="image-menu">
+{% endif%}
 <li><a href="{% url 'logout'%}">Cerrar sesion</a></li>
 
 {% endif %}

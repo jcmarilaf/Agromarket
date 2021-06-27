@@ -6,9 +6,6 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from .forms import  RegistroForm, UserUpdateForm
 from .models import Usuario
 
-class UserList(ListView):
-    model = Usuario
-    template_name = 'Usuario/perfil.html'
 
 def registrar_usuarios(request):
     if request.method == "POST":
