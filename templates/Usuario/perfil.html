@@ -1,41 +1,99 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% load static %}
+
+{% block links %}
+
+<link rel="stylesheet" href="{% static 'css/ingresar.css' %}">
+
+{% endblock links %}
+
+{% block Select-Pagina %}
+<li ><a href="{% url 'inicio' %}" >Inicio</a></li>
+
+<!--En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion-->
+{% if not user.is_authenticated %}
 
 
+<li><a href="{% url 'login' %}">Login</a></li>
+
+{% endif %}
+
+<!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
+{% if user.is_authenticated %}
+
+<li class="menu-selected"><a href="{% url 'perfil' %}" class="text-menu-selected">{{user.username}}</a></li>
+<li><a href="{% url 'logout'%}">Cerrar sesion</a></li>
+
+{% endif %}
+
+{% endblock Select-Pagina %}
 {% block content %}
-   {% if object_list %}
+<div class="container-x" id="move-content">
+    <div class="container-all">
+        <div class="container-registrar">
+            <div class="ctn-form3">
+                <div class="header-perfil">
+                    {% if user.fotoPerfil %}
+                    <img src="{{ user.fotoPerfil.url }}" alt="imagen no encontrada" class="avatar">
+                    {% else %}
+                    <img src="{% static 'img/image_default.png'%}" alt="imagen no encontrada" class="avatar">
+                    {% endif%}
+                    <h2 class="username">{{user.username}}</h2>
+                </div>
+                <form class="formulario" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <label class="form-label">Descripcion Perfil</label>
+                        <input value='{{ user.descripcionPerfil}}' type="text" name="descripcionPerfil"
+                            class="form-input" size="30px">
+                        <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Nombre de usuario (No se puede modificar.)</label>
+                        <input value='{{ user.username }}' type="text" name="username" readonly class="form-input">
+                        <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Nombre</label>
+                        <input value='{{ user.first_name }}' type="text" name="first_name" class="form-input">
+                        <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Apellido</label>
+                        <input value='{{ user.last_name}}' type="text" name="last_name" class="form-input">
+                        <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Correo</label>
+                        <input value='{{ user.email}}' type="text" name="email" class="form-input" size="30px">
+                        <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Direccion</label>
+                        <input value='{{ user.direccion}}' type="text" name="direccion" class="form-input" size="30px">
+                        <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Cantidad Productos</label>
+                        <input value='{{ user.cantidadProductos}}' type="text" name="cantidadProductos"
+                            class="form-input" size="30px">
+                        <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Imagen</label>
+                        <input type="file" name="fotoPerfil" class="form-input-image">
+                        <br>
+                    </div>
+                    <div>
+                        <button type="submit">Actualizar</button>
+                        <br>
+                    </div>
+                </form>
 
-
-   <div class="container">
-        <div> 
-            <hr>
-            <h1>Bienvenido {{ user.first_name }}, estás viendo tu perfil.</h1>
-            <hr><br>
-            <p>Nombre de usuario: {{ user.username }}</p>
-            <p>Nombre: {{ user.first_name }}</p>
-            <p>Apellidos: {{ user.last_name }}</p>
-            <p>Correo: {{ user.email }}</p>    
-            <!--<p>Rut: {{ user.registrado.rut }}</p>
-            <p>Edad: {{ user.registrado.edad }}</p>
-            <p>Número celular: {{ user.registrado.celular }}</p>  -->
-            <br>
-
-            <input type="button" value="Editar" class="btn btn-primary" onclick="alert('pendiente')">
-            <a href="{% url 'logout' %}" class="button btn btn-primary">Cerrar sesión</a>
-            <br><hr>
+            </div>
         </div>
-    </div> 
+    </div>
 
 
+    {% endblock %}
 
-     <!--   {% for user in object_list %}
-            <p>Nombre: {{ user.username }}</p>
-            <p>email: {{ user.email }}</p>      
-
-            <br>
-        {% endfor %} -->
-        
-        {% else %}
-        <h1>No hay registros de user</h1>
-        {% endif %}
-
-{% endblock %}

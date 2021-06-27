@@ -16,18 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from django.urls import path, include, re_path
-from django.contrib.auth.views import LoginView, LogoutView, TemplateView
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LoginView, LogoutView, TemplateView
 from django.urls import reverse_lazy
-
-
-
+from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('usuario/', include('Usuario.urls')),
-    path('accounts/login/', LoginView.as_view(redirect_authenticated_user=True, template_name='Usuario/login.html'), name='login'),
+    path('ingresar/', auth_views.LoginView.as_view(template_name='Usuario/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='Usuario/logout.html'), name='logout'),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('agroapp/', include('AgroApp.urls')),
+    path('', views.inicio, name="inicio"),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

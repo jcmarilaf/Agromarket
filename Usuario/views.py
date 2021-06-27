@@ -1,57 +1,44 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import CreateView
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from .forms import RegistroForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-from django import forms
-from django.contrib.auth import login, authenticate
-from . import models
+from django.contrib.messages.api import error, success
+from django.shortcuts import redirect, render, reverse
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from .forms import  RegistroForm, UserUpdateForm
 from .models import Usuario
 
-
-# Create your views here.
-
-<<<<<<< HEAD
-=======
-def Registro(request):
-    if request.user.is_authenticated:
-        return redirect('inicio')
-    if request.method == 'POST':
-        form_registro = RegistroForm(request.POST)
-        if form_registro.is_valid():
-            user = form_registro.save()
-            user.refresh_from_db()
-            user.usuario.fono = form_registro.cleaned_data.get('fono')
-            user.usuario.direccion = form_registro.cleaned_data.get('direccion')
-            user.usuario.descripcionPerfil = form_registro.cleaned_data.get('descripcionPerfil')
-            user.usuario.fotoPerfil = form_registro.cleaned_data.get('fotoPerfil')
-            user.usuario.cantidadProductos = form_registro.cleaned_data.get('cantidadProductos')
-            user.usuario.tipo_Usuario = form_registro.cleaned_data.get('tipp_Usuario')
-            user.save()
-            raw_password = form_registro.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    
-    else:
-        form_registro = RegistroForm()
-    return render(request, 'Usuario/registrar.html', {'form_registro': form_registro})
-
-
-
- 
- 
 class UserList(ListView):
-    model = User
+    model = Usuario
     template_name = 'Usuario/perfil.html'
 
-class SuccessLogin(ListView):
-    model = User
-    template_name = 'Usuario/successLogin.html'
->>>>>>> 065149b6dd4fccb37cafe8042079a96efc7ba173
+def registrar_usuarios(request):
+    if request.method == "POST":
+        form = RegistroForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Registrado correctamente', 'success')
+            return redirect("login")
+        else:
+            messages.error(request,'No se pudo registrar el usuario.','error')
+            return redirect("registrar")
+    else:
+        form = RegistroForm()
+        return render(request, "Usuario/registrar.html", {'form': form})
+
+@login_required
+def Usuario(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST , request.FILES, instance= request.user)
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request,'¡Su perfil ha sido actualizado!',success)
+            return redirect('perfil')
+        else:
+            messages.error(request, "Error, No se pudo realizar el cambio",error)
+            return redirect('perfil')
+    else:
+        u_form = UserUpdateForm(instance = request.user)
+        
+    context = {
+        'u_from': u_form
+    }
+    return render(request,'Usuario/perfil.html', context)
