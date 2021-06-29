@@ -94,7 +94,7 @@ input[type="submit"]:hover{
 
 .ctn-text{
     width: 100%;
-    background-image: url(../img/mobike.jpg) ;
+    background-image: linear-gradient(to right, #283c86, #45a247); ;
     background-position: center;
     background-size: cover;
     padding: 40px;
@@ -106,12 +106,14 @@ input[type="submit"]:hover{
     display:flex;
     font-size: 70px;
     margin: auto;
-    color: #02be1b;
+    color: #fff;
 }
 .ctn-text p{
-    padding: 50px;
-    align-items: center;
-    display: flex;
+    font-size: 20px;
+    padding: 40px;
+    color: #F2F2F2;
+    position:relative;
+    font-weight: 200;
 }
 .capa{
     width: 100%;

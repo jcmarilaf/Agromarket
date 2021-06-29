@@ -19,17 +19,15 @@ from django.urls import path, include, re_path
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView, TemplateView
 from django.urls import reverse_lazy
-from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('usuario/', include('Usuario.urls')),
-    path('ingresar/', auth_views.LoginView.as_view(template_name='Usuario/login.html'), name='login'),
+    path('', auth_views.LoginView.as_view(template_name='Usuario/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='Usuario/logout.html'), name='logout'),
     path('agroapp/', include('AgroApp.urls')),
-    path('', views.inicio, name="inicio"),
 
 ]
 

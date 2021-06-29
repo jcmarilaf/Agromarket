@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages.api import error, success
-from django.shortcuts import redirect, render, reverse
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.shortcuts import redirect, render
 from .forms import  RegistroForm, UserUpdateForm
 from .models import Usuario
 

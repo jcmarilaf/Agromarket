@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block Select-Pagina %}
+<li class="menu-selected"><a href="{% url 'inicio' %}" class="text-menu-selected">Inicio</a></li>
+
+<!-- En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion -->
+{% if not user.is_authenticated %}
+
+<li ><a href="{% url 'login' %}" >Login</a></li>
+
+{% endif %}
+
+<!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
+{% if user.is_authenticated %}
+
+{% if user.tipo_Usuario == "Cliente" %}
+<li><a href="{% url 'mis_productos' %}">Mis producto</a></li>
+{% endif %}
+<li><a href="{% url 'perfil' %}">{{user.username}}</a></li>
+{% if user.fotoPerfil %}
+<img src="{{ user.fotoPerfil.url }}" alt="imagen no encontrada" class="image-menu">
+{% else %}
+<img src="{% static 'image_default.png'%}" alt="imagen no encontrada" class="image-menu">
+{% endif%}
+<li><a href="{% url 'logout'%}">Cerrar sesion</a></li>
+{% endif %}
+
+{% endblock Select-Pagina %}
+{% block content %}
+<!-- Producto -->
+<div class="container-all">
+    <div class="container-content-producto">
+        <div class="ctn-producto">
+            <div class="imagen_producto">
+                <img src="{{producto.imagen.url}}" alt="">
+            </div>
+            <div class="info-producto">
+                <h1 class="title"> {{ producto.nombre }}</h1>
+                <label>Usuario</label>
+                <p>{{producto.usuario}}</p>
+                <br>
+                <label>Descripcion</label>
+                <p>{{producto.descripcion}}</p>
+                <br>
+                <label>Tipo de producto</label>
+                <p>{{producto.tipo_producto}}</p>
+                <br>
+                <label>Precio</label>
+                <p>{{ producto.precio }}</p>
+                <a href="{% url 'inicio' %}"><button>Volver</button></a>
+                <a href="#"><button>Contactar al vendedor</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,22 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     {% block extrastatic %}
     {% endblock %}
-    <title >{% block title %} Agromarket {% endblock %}</title>
+    <title>{% block title %} Agromarket {% endblock %}</title>
     <script src="https://kit.fontawesome.com/9c094d55de.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/9c094d55de.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href= " {% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href=" {% static 'css/estilo.css' %}">
     {% block links %}
     {% endblock links %}
 </head>
+
 <body>
     <!-- header-->
-    
     <header>
         <div class="header-content">
             <div class="logo">
@@ -26,19 +27,21 @@
                 <nav>
                     <ul>
                         {% block Select-Pagina %}
-                        <li class="menu-selected"><a href="#"  class="text-menu-selected">Inicio</a></li>
-                        
+                        <li class="menu-selected"><a href="#" class="text-menu-selected">Inicio</a></li>
+
                         <!--En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion-->
                         {% if not user.is_authenticated %}
-                        
+
                         <li><a href="{% url 'login' %}">Login</a></li>
 
                         {% endif %}
-                        
+
                         <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
                         {% if user.is_authenticated %}
+                        {% if  user.tipo_Usuario  == "Cliente" %} 
+                        <li><a href="{% url 'mis_productos' %}">Mis producto</a></li>
 
-                        <li><a href="{% url 'agregar_producto' %}">Agregar producto</a></li>
+                        {% endif %}
                         <li><a href="{% url 'perfil' %}">{{user.username}}</a></li>
                         {% if user.fotoPerfil %}
                         <img src="{{ user.fotoPerfil.url }}" alt="imagen no encontrada" class="image-menu">
@@ -47,8 +50,8 @@
                         {% endif%}
                         <li><a href="{% url 'logout'%}">Cerrar sesion</a></li>
 
-                        {% endif %} 
-                        
+                        {% endif %}
+
                         {% endblock Select-Pagina %}
                     </ul>
                 </nav>
@@ -57,24 +60,24 @@
     </header>
 
 
-    <!-- Portada-->       
-    {% block content %}
-        
-    {% endblock content %}
-    
-    
-    
-        <!-- footer -->
+    <div class="container-x" id="move-content">
+        <!-- Portada-->
+        {% block content %}
+
+        {% endblock content %}
+
+    </div>
+
+    <!-- footer -->
     <div class="container-footer">
         <footer>
             <div class="logo-footer">
                 <img src="" alt="">
             </div>
             <div class="redes-footer">
-                <a href="#"><i
-                    class="fab fa-facebook icon-redes-footer"></i></a>
-            <a href="#"><i class="fab fa-instagram icon-redes-footer"></i></a>
-            <a href="#"><i class="fab fa-twitter icon-redes-footer"></i></a>
+                <a href="#"><i class="fab fa-facebook icon-redes-footer"></i></a>
+                <a href="#"><i class="fab fa-instagram icon-redes-footer"></i></a>
+                <a href="#"><i class="fab fa-twitter icon-redes-footer"></i></a>
             </div>
             <div class="certificacion">
                 <p>
@@ -95,32 +98,32 @@
         </footer>
     </div>
 
-    <script  src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% if messages %}
-        {% if messages is success %}
-            {% for m in messages %}
-                <script>
-                    Swal.fire({
-                        "title" : "Felicitaciones",
-                        "text" : "{{m}}",
-                        "icon" : "success"
-                    })
-                </script>
-            {% endfor %}
-        {% endif %}
-        {% if messages is error %}
-            {% for m in messages %}
-            <script>
-                Swal.fire({
-                    "title" : "Error",
-                    "text" : "{{m}}",
-                    "icon" : "error"
-                })
-            </script>
-            {% endfor %}
-        {% endif %}
+    {% ifequal messages success %}
+    {% for m in messages %}
+    <script>
+        Swal.fire({
+            "title": "Felicitaciones",
+            "text": "{{m}}",
+            "icon": "success"
+        })
+    </script>
+    {% endfor %}
+    {% endifequal %}
+    {% ifequal messages error %}
+    {% for m in messages %}
+    <script>
+        Swal.fire({
+            "title": "Error",
+            "text": "{{m}}",
+            "icon": "error"
+        })
+    </script>
+    {% endfor %}
+    {% endifequal %}
     {% endif %}
 
 
@@ -128,7 +131,8 @@
 
 
     {% block scripts %}
-        
+
     {% endblock scripts %}
 </body>
+
 </html>

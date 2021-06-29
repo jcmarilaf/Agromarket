@@ -24,11 +24,9 @@
         <label for="CEREALES">CEREALES</label>
         <label for="LIQUIDOS">LIQUIDOS</label>
     </div>
-
     <div class="container-productos">
-        {% if producto %}
-        {% for c in producto %}
         <div class="productos">
+            {% for c in producto %}
             <div class="producto" data-category="{{c.tipo_producto}}">
                 <div class="ctn-img">
                     <img src="{{c.imagen.url}}" alt="Imagen no encontrada">
@@ -39,14 +37,12 @@
                 <ul class="ctn-tag">
                     <li>{{c.tipo_producto}}</li>
                 </ul>
-                <a href="#"><button>Ver producto</button></a>
+                <a href="{% url 'vista_producto' c.id %}"><button>Ver producto</button></a>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-        {% else %}
-        <p>No hay registros de productos</p>
-        {% endif %}
     </div>
 </div>
+
 
 {% endblock content %}

@@ -49,7 +49,7 @@ class Usuario(AbstractBaseUser):
         ('Cliente y vendedor', 'Cliente y vendedor'),
     )
 
-    tipo_Usuario = models.CharField(max_length=30, choices=tipo_usuario_opciones, null= True)
+    tipo_Usuario = models.CharField(max_length=30, choices=tipo_usuario_opciones, default="Cliente")
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

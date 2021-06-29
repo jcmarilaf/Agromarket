@@ -21,7 +21,9 @@
 <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
 {% if user.is_authenticated %}
 
-<li><a href="{% url 'agregar_producto' %}">Agregar producto</a></li>
+{% if user.tipo_Usuario == "Cliente" %}
+<li ><a href="{% url 'mis_productos' %}">Mis producto</a></li>
+{% endif %}
 <li class="menu-selected"><a href="{% url 'perfil' %}" class="text-menu-selected">{{user.username}}</a></li>
 {% if user.fotoPerfil %}
 <img src="{{ user.fotoPerfil.url }}" alt="imagen no encontrada" class="image-menu">

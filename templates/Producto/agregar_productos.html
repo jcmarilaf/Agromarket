@@ -3,7 +3,7 @@
 <!-- SELECCION DE PAGINA -->
 
 {% block Select-Pagina %}
-<li><a href="{% url 'inicio' %}">Inicio</a></li>
+<li ><a href="{% url 'inicio' %}" >Inicio</a></li>
 
 <!-- En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion -->
 {% if not user.is_authenticated %}
@@ -15,7 +15,9 @@
 <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
 {% if user.is_authenticated %}
 
-<li class="menu-selected"><a href="{% url 'agregar_producto' %}" class="text-menu-selected">Agregar producto</a></li>
+{% if user.tipo_Usuario == "Cliente" %}
+<li class="menu-selected"><a href="{% url 'mis_productos' %}" class="text-menu-selected">Mis producto</a></li>
+{% endif %}
 <li><a href="{% url 'perfil' %}">{{user.username}}</a></li>
 {% if user.fotoPerfil %}
 <img src="{{ user.fotoPerfil.url }}" alt="imagen no encontrada" class="image-menu">
