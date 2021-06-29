@@ -180,7 +180,7 @@ header{
 
 .producto .ctn-img img{
     width: 100%;
-    height: 100%;
+    height: 200px;
     object-fit: cover;
 }
 
@@ -461,9 +461,102 @@ button[type="submit"]:hover {
 }
 
 
+/*--PESTAÑA MIS PRODUCTOS--- */
 
 
+.container-tabla-recorridos{
+    width: 1300px;
+    height: 100%;
+    margin: auto;
+}
 
+
+.container-recorridos{
+    height: 100%;
+    background-color:#F2F2F2;
+    border-radius: 30px;
+    width: 100%;
+    margin-top: 120px;
+    padding: 20px;
+}
+
+.container-recorridos h1{
+    font-size: 30px;
+    color: #02be1b;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+}
+.container-recorridos button{
+    margin-top: 20px;
+    margin-left: 40%;
+    padding: 10px 50px;
+    font-size: 16px;
+    background: #46a2fd;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.container-content-producto{    
+    padding: 20px;
+    width: 900px;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+}
+
+.ctn-producto{
+    margin: auto;
+    width: 100%;
+    padding: 30px;
+    background:#eef2f3;
+    border-radius: 30px;
+    color: black;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.ctn-producto img{
+    width: 400px;
+    height: 300px;
+    border:#02be1b ;
+    margin: auto;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.info-producto button{
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 10px 50px;
+    font-size: 16px;
+    background: #46a2fd;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.info-producto button:hover{
+    opacity: 0.9;
+}
+
+.ctn-producto h1{
+    font-size: 60px;
+}
+.ctn-producto label {
+    padding: 5px;
+    font-size: 30px;
+}
+.ctn-producto p {
+    padding: 10px;
+    font-size: 20px;
+}
 /* Responsive */
 
 @media screen and (max-width:1200px){
