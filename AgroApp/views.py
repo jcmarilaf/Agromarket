@@ -7,10 +7,9 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 
 def agregar_producto(request):
     if request.method == "POST":
-        form = ProductosForm(request.POST)
+        form = ProductosForm(request.POST, request.FILES, request.POST)
         if form.is_valid():
-            model_instance = form
-            model_instance.save()
+            form.save()
             messages.success(request,'Producto agregado correctamente', 'success')
             return redirect("inicio")
         else:
@@ -19,3 +18,8 @@ def agregar_producto(request):
     else:
         form = ProductosForm()
         return render(request, "Producto/agregar_productos.html", {'form': form})
+
+
+def lista_productos(request):
+    producto = Producto.objects.all()
+    return render(request, "inicio.html", {'producto': producto})

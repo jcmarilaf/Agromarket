@@ -28,43 +28,53 @@
 {% endblock Select-Pagina %}
 
 {% block content %}
-        <!-- formulario de Agregar producto -->
+<!-- formulario de Agregar producto -->
 <div class="container-x" id="move-content">
     <div class="container-all">
         <div class="container-registrar">
             <div class="ctn-form1">
                 <img src="{% static 'img/mobike2.png' %}" alt="" class="logo-form1">
                 <h2 class="title">Registro</h2>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <input class="form-control" type="text" value= {{user.username}} name="usuario" readonly>
+                        <br>
+                    </div>
                     <div class="form-group">
                         <label>Nombre de Producto</label>
                         <input class="form-control" type="text" placeholder="Ingrese Nombre del Producto" name="nombre">
-                        <div class="error"{{ form.errors.nombre}}></div> 
+                        <div class="error" {{ form.errors.nombre}}></div>
                         <br>
                     </div>
                     <div class="form-group">
                         <label>Precio</label>
                         <input class="form-control" type="text" placeholder="Ingrese precio" name="precio">
-                        <div class="error"{{ form.errors.precio}}></div> 
+                        <div class="error" {{ form.errors.precio}}></div>
                         <br>
                     </div>
                     <div class="form-group">
                         <label>Descripcion</label>
                         <input class="form-control" type="text" placeholder="Ingrese Descripcion" name="descripcion">
-                        <div class="error"{{ form.errors.descripcion}}></div> 
+                        <div class="error" {{ form.errors.descripcion}}></div>
                         <br>
                     </div>
                     <div class="form-group">
                         <label>Tipo de producto</label>
                         <select id="cat2" name="tipo_producto" required>
                             <option value="">Categoría</option>
-                            <option value="1">VERDURA</option>
-                            <option value="2">FRUTA</option>
-                            <option value="3">CARNE</option>
-                            <option value="4">CEREALES</option>
-                            <option value="5">LIQUIDOS</option>
+                            <option value="VERDURA">VERDURA</option>
+                            <option value="FRUTA">FRUTA</option>
+                            <option value="CARNE">CARNE</option>
+                            <option value="CEREALES">CEREALES</option>
+                            <option value="LIQUIDOS">LIQUIDOS</option>
                         </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Imagen</label>
+                        <input type="file" name="imagen" class="form-input-image">
+                        <br>
                     </div>
                     <div class="form-group">
                         <button type="submit">GRABAR</button>
@@ -74,7 +84,7 @@
             </div>
         </div>
     </div>
-  </div>
+</div>
 
 
 

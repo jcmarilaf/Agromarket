@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     # agregar una producto  
     path('agregar_producto', views.agregar_producto, name="agregar_producto"),
+    path('', views.lista_productos, name="inicio"),
 ]
 
 if settings.DEBUG:

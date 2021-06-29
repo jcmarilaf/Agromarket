@@ -144,7 +144,7 @@ header{
 .container-content{
     background: #fff;
     padding: 20px;
-    width: 1300px;
+    width: 1400px;
     margin: auto;
     margin-top: 20px;
     display: flex;
@@ -153,19 +153,17 @@ header{
     border-radius: 16px;
 }
 
-.container-producto{
-    width: 800px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.container-productos{
+    width: 1200px;
+    margin: auto;
 }
 
 .productos{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-gap: 20px;
-    margin-top: 20px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-gap: 20px;
+        margin-top: 20px;
 }
 
 .productos .producto{

@@ -28,12 +28,12 @@ class UsuarioManager(BaseUserManager):
         user.is_admin = True
         user.save()
         return user
-
+    
 
 
 
 class Usuario(AbstractBaseUser):
-    username = models.CharField('Nombre de usuario', unique=True, max_length=100, default="")
+    username = models.CharField('Nombre de usuario', unique=True, max_length=100, default="", primary_key=True)
     email = models.EmailField('Email', max_length=254, unique=True, default="")
     first_name = models.CharField('Nombre', max_length=70, null=False, default="")
     last_name = models.CharField('Apellido', max_length=70, null=False, default="")

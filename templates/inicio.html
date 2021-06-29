@@ -24,76 +24,29 @@
         <label for="CEREALES">CEREALES</label>
         <label for="LIQUIDOS">LIQUIDOS</label>
     </div>
+
     <div class="container-productos">
-        <div class="productos" >
-            <div class="producto" data-category="FRUTA">
+        {% if producto %}
+        {% for c in producto %}
+        <div class="productos">
+            <div class="producto" data-category="{{c.tipo_producto}}">
                 <div class="ctn-img">
-                    <img src="{% static 'img/foto_prueba1.jpg' %}" alt="Imagen no encontrada">
+                    <img src="{{c.imagen.url}}" alt="Imagen no encontrada">
                 </div>
-                <h2>$5.000</h2>
-                <h3>Hamburguesa</h3>
-                <span>15 de junio 2021</span>
+                <h2>{{c.precio}}</h2>
+                <h3>{{c.nombre}}</h3>
+                <span>{{c.descripcion}}</span>
                 <ul class="ctn-tag">
-                    <li>Comida</li>
-                    <li>Carne</li>
-                </ul>
-                <a href="#"><button>Ver producto</button></a>
-            </div>
-            <div class="producto" data-category="VERDURA">
-                <div class="ctn-img">
-                    <img src="{% static 'img/foto_prueba2.jpg' %}" alt="Imagen no encontrada">
-                </div>
-                <h2>$5.000</h2>
-                <h3>Hamburguesa</h3>
-                <span>15 de junio 2021</span>
-                <ul class="ctn-tag">
-                    <li>Comida</li>
-                    <li>Carne</li>
-                </ul>
-                <a href="#"><button>Ver producto</button></a>
-            </div>
-            <div class="producto" data-category="CARNE">
-                <div class="ctn-img">
-                    <img src="{% static 'img/foto_prueba3.jpg' %}" alt="Imagen no encontrada">
-                </div>
-                <h2>$5.000</h2>
-                <h3>Hamburguesa</h3>
-                <span>15 de junio 2021</span>
-                <ul class="ctn-tag">
-                    <li>Comida</li>
-                    <li>Carne</li>
-                </ul>
-                <a href="#"><button>Ver producto</button></a>
-            </div>
-            <div class="producto" data-category="CARNE">
-                <div class="ctn-img">
-                    <img src="{% static 'img/foto_prueba1.jpg' %}" alt="Imagen no encontrada">
-                </div>
-                <h2>$5.000</h2>
-                <h3>Hamburguesa</h3>
-                <span>15 de junio 2021</span>
-                <ul class="ctn-tag">
-                    <li>Comida</li>
-                    <li>Carne</li>
-                </ul>
-                <a href="#"><button>Ver producto</button></a>
-            </div>
-            <div class="producto" data-category="LIQUIDOS">
-                <div class="ctn-img">
-                    <img src="{% static 'img/foto_prueba2.jpg' %}" alt="Imagen no encontrada">
-                </div>
-                <h2>$5.000</h2>
-                <h3>Hamburguesa</h3>
-                <span>15 de junio 2021</span>
-                <ul class="ctn-tag">
-                    <li>Comida</li>
-                    <li>Carne</li>
+                    <li>{{c.tipo_producto}}</li>
                 </ul>
                 <a href="#"><button>Ver producto</button></a>
             </div>
         </div>
-
+        {% endfor %}
+        {% else %}
+        <p>No hay registros de productos</p>
+        {% endif %}
     </div>
-
 </div>
+
 {% endblock content %}

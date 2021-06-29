@@ -99,7 +99,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% if messages %}
-        {% if messages.success %}
+        {% if messages is success %}
             {% for m in messages %}
                 <script>
                     Swal.fire({
@@ -109,7 +109,8 @@
                     })
                 </script>
             {% endfor %}
-        {% else %}
+        {% endif %}
+        {% if messages is error %}
             {% for m in messages %}
             <script>
                 Swal.fire({
