@@ -6,8 +6,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-    path('perfil', views.Usuario , name='perfil'),
+    path('perfil', views.Usuario_update , name='perfil'),
     path('registrar',  views.registrar_usuarios, name='registrar'),
+    path('perfil_vendedor/<str:username_id>',  views.perfil_vendedor, name='perfil_vendedor'),
 ]
 
 if settings.DEBUG:

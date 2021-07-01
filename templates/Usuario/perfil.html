@@ -8,8 +8,8 @@
 {% endblock links %}
 
 {% block Select-Pagina %}
-<li ><a href="{% url 'inicio' %}" >Inicio</a></li>
-
+<li><a href="{% url 'inicio' %}">Inicio</a></li>
+<li><a href="{% url 'lista_comunidades' %}">Comunidades</a></li>
 <!--En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion-->
 {% if not user.is_authenticated %}
 
@@ -20,9 +20,11 @@
 
 <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
 {% if user.is_authenticated %}
-
+{% if user.tipo_Usuario == "Vendedor" %}
+<li><a href="{% url 'mis_productos' %}">Mis producto</a></li>
+{% endif %}
 {% if user.tipo_Usuario == "Cliente" %}
-<li ><a href="{% url 'mis_productos' %}">Mis producto</a></li>
+<li><a href="{% url 'lista_deseos' %}">Lista de deseos</a></li>
 {% endif %}
 <li class="menu-selected"><a href="{% url 'perfil' %}" class="text-menu-selected">{{user.username}}</a></li>
 {% if user.fotoPerfil %}
@@ -84,7 +86,13 @@
                     <div>
                         <label class="form-label">Cantidad Productos</label>
                         <input value='{{ user.cantidadProductos}}' type="text" name="cantidadProductos"
-                            class="form-input" size="30px">
+                            class="form-input" size="30px" readonly>
+                        <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Tipo de usuario</label>
+                        <input value='{{ user.tipo_Usuario}}' type="text" name="tipo_Usuario" class="form-input"
+                            size="30px" readonly>
                         <br>
                     </div>
                     <div>
@@ -104,4 +112,3 @@
 
 
     {% endblock %}
-

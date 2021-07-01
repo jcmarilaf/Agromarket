@@ -4,6 +4,7 @@
 
 {% block Select-Pagina %}
 <li ><a href="{% url 'inicio' %}" >Inicio</a></li>
+<li><a href="{% url 'lista_comunidades' %}">Comunidades</a></li>
 
 <!-- En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion -->
 {% if not user.is_authenticated %}
@@ -15,7 +16,7 @@
 <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
 {% if user.is_authenticated %}
 
-{% if user.tipo_Usuario == "Cliente" %}
+{% if user.tipo_Usuario == "Vendedor" %}
 <li class="menu-selected"><a href="{% url 'mis_productos' %}" class="text-menu-selected">Mis producto</a></li>
 {% endif %}
 <li><a href="{% url 'perfil' %}">{{user.username}}</a></li>
@@ -35,7 +36,6 @@
     <div class="container-all">
         <div class="container-registrar">
             <div class="ctn-form1">
-                <img src="{% static 'img/mobike2.png' %}" alt="" class="logo-form1">
                 <h2 class="title">Registro</h2>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -79,7 +79,8 @@
                         <br>
                     </div>
                     <div class="form-group">
-                        <button type="submit">GRABAR</button>
+                        <a href="{% url 'mis_productos' %}"><button class="botones-editar" type="button"> Volver</button></a>
+                    <button type="submit" class="botones-editar">Publicar</button>
                         <br>
                     </div>
                 </form>
@@ -87,8 +88,5 @@
         </div>
     </div>
 </div>
-
-
-
 
 {% endblock content %}

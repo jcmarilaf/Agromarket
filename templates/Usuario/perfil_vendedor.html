@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block links %}
+
+<link rel="stylesheet" href="{% static 'css/ingresar.css' %}">
+
+{% endblock links %}
+
+{% block Select-Pagina %}
+<li class="menu-selected"><a href="{% url 'inicio' %}" class="text-menu-selected">Inicio</a></li>
+<li><a href="{% url 'lista_comunidades' %}">Comunidades</a></li>
+
+<!--En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion-->
+{% if not user.is_authenticated %}
+
+
+<li><a href="{% url 'login' %}">Login</a></li>
+
+{% endif %}
+
+<!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
+{% if user.is_authenticated %}
+{% if user.tipo_Usuario == "Vendedor" %}
+<li><a href="{% url 'mis_productos' %}">Mis producto</a></li>
+{% endif %}
+{% if user.tipo_Usuario == "Cliente" %}
+<li><a href="{% url 'lista_deseos' %}">Lista de deseos</a></li>
+{% endif %}
+<li><a href="{% url 'perfil' %}">{{user.username}}</a></li>
+{% if user.fotoPerfil %}
+<img src="{{ user.fotoPerfil.url }}" alt="imagen no encontrada" class="image-menu">
+{% else %}
+<img src="{% static 'image_default.png'%}" alt="imagen no encontrada" class="image-menu">
+{% endif%}
+<li><a href="{% url 'logout'%}">Cerrar sesion</a></li>
+
+{% endif %}
+
+{% endblock Select-Pagina %}
+{% block content %}
+<div class="inicio-perfil-vendedor">
+    <h1>AgroMarket</h1>
+</div>
+<div class="container-x" id="move-content">
+    <div class="container-perfil-vendedor">
+        <div class="ctn-perfil-vendedor">
+            <div class="card">
+                <img class="card-img-bottom" src="{{ data.fotoPerfil.url }}" alt="Card image cap">
+            </div>
+            <div class="datos-vendedor">
+                <br>
+                <br>
+                <label class="form-label"> {{data.username}} </label>
+                <label class="form-label">{{ data.first_name }} {{ data.last_name}}</label>
+                <label class="form-label">{{ data.descripcionPerfil }}</label>
+                <label class="form-label">{{ data.email}}</label>
+                <label class="form-label">{{ data.direccion}}</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <a href="{% url 'inicio' %}"><button class="botones-editar" type="button">
+                    Volver</button></a>
+            <button type="button" class="botones-editar" value="Iniciar">Contactar</button>
+            <br>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

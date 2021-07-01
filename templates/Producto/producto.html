@@ -3,19 +3,23 @@
 
 {% block Select-Pagina %}
 <li class="menu-selected"><a href="{% url 'inicio' %}" class="text-menu-selected">Inicio</a></li>
+<li><a href="{% url 'lista_comunidades' %}">Comunidades</a></li>
 
 <!-- En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion -->
 {% if not user.is_authenticated %}
 
-<li ><a href="{% url 'login' %}" >Login</a></li>
+<li><a href="{% url 'login' %}">Login</a></li>
 
 {% endif %}
 
 <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
 {% if user.is_authenticated %}
 
-{% if user.tipo_Usuario == "Cliente" %}
+{% if user.tipo_Usuario == "Vendedor" %}
 <li><a href="{% url 'mis_productos' %}">Mis producto</a></li>
+{% endif %}
+{% if user.tipo_Usuario == "Cliente" %}
+<li><a href="{% url 'lista_deseos' %}">Lista de deseos</a></li>
 {% endif %}
 <li><a href="{% url 'perfil' %}">{{user.username}}</a></li>
 {% if user.fotoPerfil %}
@@ -32,26 +36,69 @@
 <div class="container-all">
     <div class="container-content-producto">
         <div class="ctn-producto">
+            {% csrf_token %}
+            <div class="vendedor">
+                <img src="{{producto.usuario.fotoPerfil.url}}" alt="Imagen no encontrada">
+                <label>{{producto.usuario}}</label>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120419.12622614627!2d-70.71238841063042!3d-33.46442349094868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c5410425af2f%3A0x8475d53c400f0931!2sSantiago%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1625028301762!5m2!1ses-419!2scl"
+                    width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+                {% if user.is_authenticated %}
+                {% if user.tipo_Usuario == "Cliente" %}
+                <a href="{% url 'perfil_vendedor' producto.usuario.username %}"><button>Contactar al vendedor</button></a>
+                {% endif %}
+                {% endif %}
+            </div>
             <div class="imagen_producto">
+                <h1>AgroMarket</h1>
                 <img src="{{producto.imagen.url}}" alt="">
+                <a href="{% url 'inicio' %}"><button>Volver</button></a>
             </div>
             <div class="info-producto">
                 <h1 class="title"> {{ producto.nombre }}</h1>
-                <label>Usuario</label>
-                <p>{{producto.usuario}}</p>
+                <label>${{ producto.precio }}</label>
                 <br>
-                <label>Descripcion</label>
+                <br>
                 <p>{{producto.descripcion}}</p>
                 <br>
-                <label>Tipo de producto</label>
                 <p>{{producto.tipo_producto}}</p>
                 <br>
-                <label>Precio</label>
-                <p>{{ producto.precio }}</p>
-                <a href="{% url 'inicio' %}"><button>Volver</button></a>
-                <a href="#"><button>Contactar al vendedor</button></a>
+                {% if user.is_authenticated %}
+                {% if user.tipo_Usuario == "Cliente" %}
+                <button type="button" onclick="Agregar_deseos();">agregar a lista de deseos</button>
+                {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 {% endblock content %}
+
+{% block extrajs%}
+
+
+
+<script type="text/javascript">
+    function Agregar_deseos() {
+        data = {
+            'usuario': "{{request.user}}",
+            'producto': "{{producto.id}}",
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+        }
+        $.ajax({
+            data: data,
+            url: "{% url 'agregarDeseo' %}",
+            type: 'POST',
+            success: function (response) {
+                notificacionSuccess(response.mensaje)
+                window.location.href = response.url;
+            },
+            error: function (error) {
+                notificacionError(error.responseJSON.mensaje);
+            }
+        });
+    }
+</script>
+{% endblock extrajs%}

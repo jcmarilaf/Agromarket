@@ -23,10 +23,13 @@
     
 }
 
-.ctn-form{
+.ctn-form-login{
     width: 80%;
     padding: 40px;
     background: #ffffff;
+    
+    justify-content: center;
+    text-align: center;
 }
 
 .title{
@@ -121,7 +124,7 @@ input[type="submit"]:hover{
     position:absolute;
     top: 0;
     left: 0;
-    background: linear-gradient(to bottom, #bdc3c7, #2c3e50);;
+    background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
     opacity: 0.4;
 }
 .title-description{
@@ -140,11 +143,6 @@ input[type="submit"]:hover{
     font-weight: 200;
 }
 
-.msg-error{
-    color: red;
-    display: block;
-    margin-top: 10px;
-}
 
 .ctn-welcome{
     width: 100%;

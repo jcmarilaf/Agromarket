@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import tree
 from Usuario.models import Usuario
 
 # Create your models here.
@@ -62,11 +63,12 @@ class Comunidad(models.Model):
     nombre_comunidad, los cuales serán necesarios para que el vendedor 
     pueda crear de forma correcta una comunidad entre sus clientes. '''
     nombre = models.CharField(max_length=100, unique=True)
-    usuario = models.ForeignKey(Usuario, related_name='comunidades', on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, related_name='comunidades',null=True, on_delete=models.CASCADE)
+    creador = models.CharField(max_length=100, null=False , default="")
 
     class Meta:
         verbose_name_plural = 'Comunidades'
-
+        
     def __str__(self):
         return f'{self.nombre}'
 

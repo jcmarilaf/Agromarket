@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block Select-Pagina %}
 <li ><a href="{% url 'inicio' %}" >Inicio</a></li>
 <li><a href="{% url 'lista_comunidades' %}">Comunidades</a></li>
@@ -8,7 +7,7 @@
 <!-- En caso de que el usuario no esté con su sesion activa, se mostraran las opciones de registrarse e iniciar sesion -->
 {% if not user.is_authenticated %}
 
-<li class="menu-selected"><a href="{% url 'login' %}" class="text-menu-selected">Login</a></li>
+<li ><a href="{% url 'login' %}" >Login</a></li>
 
 {% endif %}
 
@@ -16,7 +15,10 @@
 {% if user.is_authenticated %}
 
 {% if user.tipo_Usuario == "Vendedor" %}
-<li class="menu-selected"><a href="{% url 'mis_productos' %}" class="text-menu-selected">Mis producto</a></li>
+<li><a href="{% url 'mis_productos' %}">Mis producto</a></li>
+{% endif %}
+{% if user.tipo_Usuario == "Cliente" %}
+<li class="menu-selected"><a href="{% url 'lista_deseos' %}" class="text-menu-selected">Lista de deseos</a></li>
 {% endif %}
 <li><a href="{% url 'perfil' %}">{{user.username}}</a></li>
 {% if user.fotoPerfil %}
@@ -31,7 +33,6 @@
 
 
 {% block content %}
-
 <div class="container-x" id="move-content">
     <div class="container-tabla-recorridos">
         <div class="container-recorridos">
@@ -44,22 +45,22 @@
                         <th>Precio</th>
                         <th>Tipo producto</th>
                         <th>Editar</th>
-                        <th>Borrar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
-                {% if productos %}
-                {% for c in productos %}
+                {% if lista %}
+                {% for c in lista %}
                 <tbody>
                     <tr>
                         <div clas="img_tabla">
-                            <td><img src="{{ c.imagen.url }}" alt="no se encontro la imagen" width="50" height="50">
+                            <td><img src="{{ c.producto.imagen.url }}" alt="no se encontro la imagen" width="50" height="50">
                             </td>
                         </div>
-                        <td>{{ c.nombre }}</td>
-                        <td>$ {{ c.precio }}</td>
-                        <td>{{ c.tipo_producto }}</td>
-                        <td><a href="{% url 'editar_producto' c.id %}" class="btn btn-primary"> Editar </a></td>
-                        <td><a href="{% url 'borrar_producto' c.id %}" class="btn btn-danger" onclick="confirmation();"> Borrar </a></td>
+                        <td>{{ c.producto.nombre }}</td>
+                        <td>$ {{ c.producto.precio }}</td>
+                        <td>{{ c.producto.tipo_producto }}</td>
+                        <td><a href="{% url 'vista_producto' c.producto.id %}" class="btn btn-primary"> Ver producto </a></td>
+                        <td><a href="{% url 'borrar_deseo' c.id %}" class="btn btn-danger" onclick="confirmation();"> Borrar </a></td>
                     </tr>
                     <br>
                     {% endfor %}
@@ -68,10 +69,13 @@
                     <td>No hay registros de productos</td>
                     <td>No hay registros de productos</td>
                     <td>No hay registros de productos</td>
+                    <td>No hay registros de productos</td>
                     {% endif %}
             </table>
-        <a href="{% url 'agregar_producto' %}"><button>Agregar productos</button></a>
         </div>
     </div>
 </div>
+
+
+
 {% endblock content %}
