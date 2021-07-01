@@ -38,21 +38,14 @@
 <div class="container-x" id="move-content">
     <div class="container-tabla-recorridos">
         <div class="container-recorridos">
-            <h1>Mis Productos</h1>
+            <h1>Comunidades</h1>
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
                         <th>Nombre</th>
                         <Th>Creador de comunidad</Th>
                         <th>Ver Comunidad</th>
-                        {% if lista %}
-                        {% for c in lista %}
-                        {% if user.username == c.creador%}
                         <th>Eliminar</th>
-                        {% endif %}
-                        {% endfor %}
-                        {% endif %}
-
                     </tr>
                 </thead>
                 {% if lista %}

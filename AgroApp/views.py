@@ -124,6 +124,7 @@ def borrar_comunidad(request,comunidad_id):
 def editar_comunidad(request,comunidad_id):
     # Recuperamos la instancia del producto
     comunidad = get_object_or_404(Comunidad, id=comunidad_id)
+    lista = Comunidad.objects.all().filter(id = comunidad_id)
     # Comprobamos si se ha enviado el formulario
     if request.method == "POST":
         # Actualizamos el formulario con los datos recibidos
@@ -139,8 +140,26 @@ def editar_comunidad(request,comunidad_id):
         formulario = ComunidadForm(instance=comunidad)
     data = {
         'formulario':formulario,
-        'comunidad':comunidad
+        'comunidad':comunidad,
+        'lista':lista
     }
 
     # Si llegamos al final renderizamos el formulario
     return render(request, "Comunidad/editar_comunidad.html",  data)
+
+
+class UnirseComunidad(CreateView):
+    model = Comunidad
+    success_url = reverse_lazy('lista_comunidades')
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            usuario = Usuario.objects.all().filter(request.user)
+            if  usuario:
+                Comunidad.add(usuario)
+                mensaje = f'{self.model.__name__} registrado correctamente!.'
+                error = 'No hay error!.'
+                response = JsonResponse({'mensaje':mensaje, 'error':error, 'url':self.success_url})
+                response.status_code = 201
+                return response
+        return redirect('lista_comunidades')

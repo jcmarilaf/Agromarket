@@ -19,6 +19,7 @@ urlpatterns = [
     path('lista_comunidades', views.lista_comunidades, name="lista_comunidades"),
     path('borrar_comunidad/<int:comunidad_id>', views.borrar_comunidad, name="borrar_comunidad"),
     path('editar_comunidad/<int:comunidad_id>', views.editar_comunidad ,name="editar_comunidad"),
+    path('UnirseComunidad', UnirseComunidad.as_view(), name="UnirseComunidad"),
 ]
 
 if settings.DEBUG:

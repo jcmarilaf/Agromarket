@@ -73,6 +73,7 @@ class Comunidad(models.Model):
         return f'{self.nombre}'
 
 
+
 class Venta(models.Model):
     ''' Dentro de esta clase podemos encontrar atributos que están relacionados al momento en 
     que se realiza una venta de un producto y sus atributos para el correcto funcionamiento 

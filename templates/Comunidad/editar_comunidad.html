@@ -16,10 +16,10 @@
 <!-- Ver si el usuario esta identificado y que tipo de usuario -->
 {% if user.is_authenticated %}
 {% if user.tipo_Usuario == "Vendedor" %}
-<li class="menu-selected"><a href="{% url 'mis_productos' %}" class="text-menu-selected">Mis producto</a></li>
+<li><a href="{% url 'mis_productos' %}">Mis producto</a></li>
 {% endif %}
 {% if user.tipo_Usuario == "Cliente" %}
-<li class="menu-selected"><a href="{% url 'lista_deseos' %}" class="text-menu-selected">Lista de deseos</a></li>
+<li><a href="{% url 'lista_deseos' %}">Lista de deseos</a></li>
 {% endif %}
 <!--En caso de que el usuario esté con su sesión activa, se mostrará una opcion en la que muestra su nombre de usuario, y redirige a una ventana que muestra su perf-->
 <li><a href="{% url 'perfil' %}">{{user.username}}</a></li>
@@ -44,17 +44,27 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label>Nombre de la comunidad</label>
-                        <input class="form-control" type="text" name="nombre" value="{{comunidad.nombre}}" >
+                        {% if user.username == comunidad.creador%}
+                        <input class="form-control" type="text" name="nombre" value="{{comunidad.nombre}}">
                         <br>
+                        {% else %}
+                        <input class="form-control" type="text" name="nombre" value="{{comunidad.nombre}}" readonly>
+                        <br>
+                        {%endif%}
+
                         <label>Creador de la comunidad</label>
                         <input class="form-control" type="text" name="creador" value="{{comunidad.creador}}" readonly>
                         <label>Usuario</label>
-                        <input class="form-control" type="text" name="usuario" value="{{comunidad.creador}}" readonly>
+                        {% for c in lista %}
+                        <input class="form-control" type="text" name="usuario" value="{{c.usuario}}" readonly>
+                        {% endfor %}
                     </div>
                     <div class="form-group">
                         <a href="{% url 'lista_comunidades' %}"><button class="botones-editar" type="button">
                                 Volver</button></a>
+                        {% if user.username == comunidad.creador%}
                         <button type="submit" class="botones-editar">Editar</button>
+                        {%endif%}
                         <br>
                     </div>
                 </form>
@@ -62,5 +72,6 @@
         </div>
     </div>
 </div>
+
 
 {% endblock content %}

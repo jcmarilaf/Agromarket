@@ -1,10 +1,11 @@
+from AgroApp.models import Comunidad
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages.api import error, success
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import  RegistroForm, UserUpdateForm
 from .models import Usuario
-
+from django.urls import reverse_lazy
 
 def registrar_usuarios(request):
     if request.method == "POST":
@@ -26,10 +27,10 @@ def Usuario_update(request):
         u_form = UserUpdateForm(request.POST , request.FILES, instance= request.user)
         if u_form.is_valid():
             u_form.save()
-            messages.success(request,'¡Su perfil ha sido actualizado!',success)
+            messages.success(request,'¡Su perfil ha sido actualizado!')
             return redirect('perfil')
         else:
-            messages.error(request, "Error, No se pudo realizar el cambio",error)
+            messages.error(request, "Error, No se pudo realizar el cambio")
             return redirect('perfil')
     else:
         u_form = UserUpdateForm(instance = request.user)
@@ -42,3 +43,4 @@ def Usuario_update(request):
 def perfil_vendedor(request,username_id):
     data =  get_object_or_404(Usuario, username=username_id)
     return render(request,"Usuario/perfil_vendedor.html",{'data': data})
+
